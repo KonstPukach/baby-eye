@@ -3,6 +3,10 @@ buildscript {
         set("composeVersion", "1.2.1")
         set("composeCompilerVersion", "1.3.1")
     }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:7.3.0")
+    }
 }
 
 plugins {

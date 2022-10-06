@@ -9,10 +9,12 @@ val composeVersion: String by rootProject.extra
 android {
     compileSdk = 33
 
+    namespace = "com.pukachkosnt.babyeye"
+
     defaultConfig {
         applicationId = "com.pukachkosnt.babyeye"
         minSdk = 24
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -59,6 +61,9 @@ android {
 }
 
 dependencies {
+    // Project modules dependencies
+    implementation(project(":features:login:ui"))
+
     // Core
     implementation("androidx.core:core-ktx:1.9.0")
 

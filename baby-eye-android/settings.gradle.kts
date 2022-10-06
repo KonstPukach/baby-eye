@@ -17,4 +17,14 @@ dependencyResolutionManagement {
 rootProject.name = "BabyEye"
 
 include(":app")
-include(":remote")
+
+include(
+    ":remote:networking",
+    ":remote:networking-impl"
+)
+
+include(
+    ":features:login:data",
+    ":features:login:domain",
+    ":features:login:ui"
+)
