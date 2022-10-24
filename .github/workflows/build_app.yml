@@ -19,13 +19,11 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          
-      - run: cd baby-eye-android
       
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
       
-      - run: chmod +x gradlew
+      - run: chmod +x baby-eye-android/gradlew
 
       - name: Build with gradle
         run: ./gradlew assembleDebug
