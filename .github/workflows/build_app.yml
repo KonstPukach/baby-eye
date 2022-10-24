@@ -10,6 +10,10 @@ jobs:
     name: Build debug assemble
 
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./baby-eye-android
 
     steps:
       - uses: actions/checkout@v3
@@ -23,7 +27,7 @@ jobs:
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
       
-      - run: chmod +x baby-eye-android/gradlew
+      - run: chmod +x gradlew
 
       - name: Build with gradle
         run: ./gradlew assembleDebug
