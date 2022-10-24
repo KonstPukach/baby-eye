@@ -2,6 +2,8 @@ buildscript {
     extra.apply {
         set("composeVersion", "1.2.1")
         set("composeCompilerVersion", "1.3.1")
+        set("daggerVersion", "2.44")
+        set("navigationVersion", "2.5.2")
     }
 
     dependencies {

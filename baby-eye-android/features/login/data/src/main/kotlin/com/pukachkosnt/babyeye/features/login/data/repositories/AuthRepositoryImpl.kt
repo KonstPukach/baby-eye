@@ -7,8 +7,9 @@ import com.pukachkosnt.babyeye.features.login.domain.repositories.AuthRepository
 import com.pukachkosnt.babyeye.remote.networking.auth.TokenStore
 import com.pukachkosnt.babyeye.remote.networking.models.AuthResponseApi
 import retrofit2.Response
+import javax.inject.Inject
 
-class AuthRepositoryImpl(
+class AuthRepositoryImpl @Inject constructor(
     private val loginSource: LoginSource,
     private val tokenStore: TokenStore
 ) : AuthRepository {
