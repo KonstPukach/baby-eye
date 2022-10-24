@@ -7,8 +7,6 @@ permissions:
 
 jobs:
   build:
-    if: startsWith(github.head_ref, 'debug/') == true
-
     name: Build debug assemble
 
     runs-on: ubuntu-latest
