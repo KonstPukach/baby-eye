@@ -6,8 +6,9 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Inject
 
-class RetrofitServiceFactory : ServiceFactory {
+class RetrofitServiceFactory @Inject constructor() : ServiceFactory {
 
     private val retrofit: Retrofit
 

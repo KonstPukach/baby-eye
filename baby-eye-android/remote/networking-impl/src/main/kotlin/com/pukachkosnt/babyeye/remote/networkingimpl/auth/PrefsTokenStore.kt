@@ -3,8 +3,9 @@ package com.pukachkosnt.babyeye.remote.networkingimpl.auth
 import android.content.SharedPreferences
 import com.pukachkosnt.babyeye.remote.networking.auth.TokenStore
 import com.pukachkosnt.babyeye.remote.networkingimpl.utils.failure
+import javax.inject.Inject
 
-class PrefsTokenStore(private val prefs: SharedPreferences) : TokenStore {
+class PrefsTokenStore @Inject constructor(private val prefs: SharedPreferences) : TokenStore {
 
     private var cachedToken: String? = null
 
