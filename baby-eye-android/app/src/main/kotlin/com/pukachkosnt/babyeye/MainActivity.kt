@@ -19,19 +19,19 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             BabyEyeTheme {
-                val navController = rememberNavController()
-
-                val mainComponent = appComponent
-                    .mainActivityComponent()
-                    .create(navController)
-
-                val features = featureMapOf(
-                    Login to mainComponent.createLoginFeatureFactory()
-                )
-
-                NavHost(navController = navController, startDestination = Login.route) {
-                    fromFeatureMap(features)
-                }
+//                val navController = rememberNavController()
+//
+//                val mainComponent = appComponent
+//                    .mainActivityComponent()
+//                    .create(navController)
+//
+//                val features = featureMapOf(
+//                    Login to mainComponent.createLoginFeatureFactory()
+//                )
+//
+//                NavHost(navController = navController, startDestination = Login.route) {
+//                    fromFeatureMap(features)
+//                }
             }
         }
     }
