@@ -24,6 +24,11 @@ include(
 )
 
 include(
+    ":core:navigation",
+    ":core:di:core"
+)
+
+include(
     ":features:login:data",
     ":features:login:domain",
     ":features:login:ui"

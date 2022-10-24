@@ -1,10 +1,12 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
 }
 
 val composeCompilerVersion: String by rootProject.extra
 val composeVersion: String by rootProject.extra
+val daggerVersion: String by rootProject.extra
 
 android {
     compileSdk = 33
@@ -45,6 +47,8 @@ dependencies {
     implementation(project(":features:login:data"))
     implementation(project(":remote:networking-impl"))
     implementation(project(":remote:networking"))
+    implementation(project(":core:navigation"))
+    implementation(project(":core:di:core"))
 
     // Compose
     implementation("androidx.compose.ui:ui:$composeVersion")
@@ -54,4 +58,8 @@ dependencies {
     // Android
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+
+    // DI - Dagger 2
+    implementation("com.google.dagger:dagger:$daggerVersion")
+    kapt("com.google.dagger:dagger-compiler:$daggerVersion")
 }
