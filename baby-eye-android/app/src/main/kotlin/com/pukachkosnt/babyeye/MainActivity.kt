@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
 //
 //                NavHost(navController = navController, startDestination = Login.route) {
 //                    fromFeatureMap(features)
-//                }
+                 }
             }
         }
     }
