@@ -3,7 +3,7 @@ name: Build and test application
 on: [pull_request, push]
 
 permissions:
-  content: read
+  contents: read
 
 jobs:
   build:
