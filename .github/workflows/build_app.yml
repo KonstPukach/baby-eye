@@ -1,6 +1,14 @@
 name: Build and test application
 
-on: [pull_request, push]
+on:
+  pull_request:
+    paths:
+      - 'baby-eye-android/**'
+    branches: [ 'master', 'android/**' ]
+  push:
+    paths:
+      - 'baby-eye-android/**'
+    branches: [ 'master', 'android/develop' ]
 
 permissions:
   contents: read
@@ -27,7 +35,11 @@ jobs:
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
+      # Change gradle wrapper permissions
       - run: chmod +x gradlew
 
-      - name: Build with gradle
+      - name: Create APK Debug
         run: ./gradlew assembleDebug
+
+      - name: Run unit tests on debug version
+        run: ./gradlew testDebugUnitTest --stacktrace
