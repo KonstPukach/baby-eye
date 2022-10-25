@@ -11,21 +11,8 @@ internal fun LoginScreen(
     loginViewModel: LoginViewModel,
     navController: NavController
 ) {
-    Column {
         Button(onClick = { /*TODO*/ }) {
             Text(text = "Button")
         }
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "Button2")
-        }
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "Button3")
-        }
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "Button2")
-        }
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "Button3")
-        }
-    }
+
 }
