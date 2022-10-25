@@ -38,6 +38,16 @@ jobs:
       # Change gradle wrapper permissions
       - run: chmod +x gradlew
 
+      # Cache gradle dependencies
+      - uses: actions/cache@v3
+        with: 
+          path: |
+            ~/.gradle/cache
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle
+
       - name: Create APK Debug
         run: ./gradlew assembleDebug
 
