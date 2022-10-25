@@ -14,6 +14,12 @@ dependencyResolutionManagement {
     }
 }
 
+buildCache {
+    local {
+        isEnabled = System.getenv().containsKey("CI")
+    }
+}
+
 rootProject.name = "BabyEye"
 
 include(":app")
