@@ -21,3 +21,7 @@ plugins {
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
+
+tasks.register("printenv") {
+    println(System.getenv().keys.joinToString())
+}
