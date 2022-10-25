@@ -62,4 +62,7 @@ dependencies {
     // DI - Dagger 2
     implementation("com.google.dagger:dagger:$daggerVersion")
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
+
+    // Tests
+    testImplementation("junit:junit:4.13.2")
 }
