@@ -1,0 +1,51 @@
+name: Build and test application
+
+on:
+  pull_request:
+    paths:
+      - 'baby-eye-android/**'
+    branches: [ 'master', 'android/**' ]
+  push:
+    paths:
+      - 'baby-eye-android/**'
+    branches: [ 'master', 'android/develop' ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build debug assemble
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./baby-eye-android
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: false
+          cache-write-only: false
+          gradle-home-cache-excludes: false
+
+      - run: chmod +x gradlew
+
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Create APK Debug
+        run: ./gradlew assembleDebug
+
+      - name: Run unit tests on debug version
+        run: ./gradlew --stacktrace testDebugUnitTest
