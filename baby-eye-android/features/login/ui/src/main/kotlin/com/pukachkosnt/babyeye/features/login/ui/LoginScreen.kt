@@ -17,5 +17,11 @@ internal fun LoginScreen(
         }
     }
     Column {
+        Button(onClick = { /*TODO*/ }) {
+            Text(text = "Button")
+        }
+        Button(onClick = { /*TODO*/ }) {
+            Text(text = "Button")
+        }
     }
 }
