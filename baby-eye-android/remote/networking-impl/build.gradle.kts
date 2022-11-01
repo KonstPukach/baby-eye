@@ -43,6 +43,14 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        create("qa") {
+            buildConfigField(
+                type = "String",
+                name = "SERVER_URL",
+                value = buildProperties["qaServerUrl"] as String
+            )
+        }
     }
 
     compileOptions {
