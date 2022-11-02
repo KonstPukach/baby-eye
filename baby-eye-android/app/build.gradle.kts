@@ -1,12 +1,21 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.appdistribution")
 }
 
 val composeCompilerVersion: String by rootProject.extra
 val composeVersion: String by rootProject.extra
 val daggerVersion: String by rootProject.extra
+
+val qaKeystoreProperties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
+}
 
 android {
     compileSdk = 33
@@ -26,6 +35,15 @@ android {
         }
     }
 
+    signingConfigs {
+        create("qa") {
+            storeFile     = file(qaKeystoreProperties.getProperty("qaSignKeystoreFile"))
+            storePassword = qaKeystoreProperties.getProperty("qaSignKeystorePassword")
+            keyAlias      = qaKeystoreProperties.getProperty("qaSignKeystoreKeyAlias")
+            keyPassword   = qaKeystoreProperties.getProperty("qaSignKeyPassword")
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -33,6 +51,22 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+
+        create("qa") {
+            isDebuggable = true
+            signingConfig = signingConfigs["qa"]
+            firebaseAppDistribution {
+                artifactType = "APK"
+                testers = "pukachkosnt@gmail.com"
+                releaseNotesFile = rootProject.projectDir.path + "/app/release-notes.txt"
+            }
+
+            defaultConfig {
+                val qaVersion = 2
+                versionCode = createQaReleaseVersionCode(qaVersion)
+                versionName = createQaReleaseVersionName(qaVersion)
+            }
         }
     }
 
@@ -95,4 +129,13 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
+}
+
+tasks.register("uploadQaRelease", GradleBuild::class.java) {
+    description = "Uploads QA release apk to firebase with given release notes in release-notes.txt"
+
+    doFirst {
+        generateReleaseNotesIfNotExist()
+        tasks = listOf("assembleQa", "appDistributionUploadQa")
+    }
 }
