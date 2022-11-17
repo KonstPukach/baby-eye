@@ -31,7 +31,8 @@ include(
 
 include(
     ":core:navigation",
-    ":core:di:core"
+    ":core:di:core",
+    "core:common-ui"
 )
 
 include(
