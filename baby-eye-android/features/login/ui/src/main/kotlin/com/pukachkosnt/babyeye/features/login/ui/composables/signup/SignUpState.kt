@@ -15,7 +15,7 @@ import com.pukachkosnt.babyeye.core.commonui.validators.model.ValidationPipeline
 import com.pukachkosnt.babyeye.core.commonui.validators.password.RepeatPasswordValidator
 import com.pukachkosnt.babyeye.features.login.ui.composables.signup.models.UiSignUpModel
 
-class SignUpState(
+internal class SignUpState(
     val emailState: ValidatedTextInputFieldState,
     val repeatPasswordFormState: RepeatPasswordFormState,
     override val validationPipeline: ValidationPipeline<UiSignUpModel, SignUpState>
@@ -23,7 +23,7 @@ class SignUpState(
     
     private val validatedStatesList = listOf(emailState, repeatPasswordFormState)
 
-    private val uiSignUpModel: UiSignUpModel
+    val uiSignUpModel: UiSignUpModel
         get() = UiSignUpModel(
             email = emailState.text,
             password = repeatPasswordFormState.passwordState.text,
@@ -50,7 +50,7 @@ class SignUpState(
 }
 
 @Composable
-fun rememberSignUpState(
+internal fun rememberSignUpState(
     emailState: ValidatedTextInputFieldState = remember { ValidatedTextInputFieldState.email() },
     repeatPasswordFormState: RepeatPasswordFormState = rememberRepeatPasswordFormState(
         validationPipeline = ValidationPipeline.from(

@@ -8,4 +8,7 @@
 
     <string name="go_to_signin">Go to sign in</string>
     <string name="go_to_signup">Go to sign up</string>
+
+    <string name="user_already_exists">User with this e-mail already exists</string>
+    <string name="wrong_password">Wrong password</string>
 </resources>

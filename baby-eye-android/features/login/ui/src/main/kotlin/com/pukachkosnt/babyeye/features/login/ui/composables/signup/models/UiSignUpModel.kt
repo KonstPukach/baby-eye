@@ -4,7 +4,7 @@ import com.pukachkosnt.babyeye.core.commonui.validators.password.RepeatableField
 import com.pukachkosnt.babyeye.core.commonui.validators.password.RepeatableFields
 import com.pukachkosnt.babyeye.core.commonui.validators.password.repeats
 
-data class UiSignUpModel(
+internal data class UiSignUpModel(
     val email: String,
     val password: String,
     val repeatPassword: String

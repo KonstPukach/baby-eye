@@ -12,7 +12,12 @@ internal const val SingInDestination = "sign-in"
 internal const val SingUpDestination = "sign-up"
 
 @Composable
-internal fun LoginNavHost(loginNavController: NavHostController, modifier: Modifier = Modifier) {
+internal fun LoginNavHost(
+    loginViewModel: LoginViewModel,
+    loginNavController: NavHostController,
+    modifier: Modifier = Modifier,
+    errorText: String? = null
+) {
     NavHost(
         modifier = modifier,
         navController = loginNavController,
@@ -20,18 +25,16 @@ internal fun LoginNavHost(loginNavController: NavHostController, modifier: Modif
     ) {
         composable(SingInDestination) {
             SignInInputForm(
-                goToSignUp = {
-                    loginNavController.navigate(SingUpDestination) {
-
-                    }
-                }
+                onSignInButtonClick = loginViewModel::signIn,
+                goToSignUp = { loginNavController.navigate(SingUpDestination) },
+                errorText = errorText
             )
         }
         composable(SingUpDestination) {
             SignUpInputForm(
-                goToSignIn = {
-                    loginNavController.navigateUp()
-                }
+                onSignUpButtonClick = loginViewModel::signUp,
+                goToSignIn = { loginNavController.navigateUp() },
+                errorText = errorText
             )
         }
     }

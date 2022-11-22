@@ -12,4 +12,10 @@
     <string name="invalid_pswd_err">Password must have at least one capital, one number and one lowercase characters</string>
     <string name="empty_field_err">The field is empty</string>
     <string name="passwords_are_not_the_same_err">Passwords are not the same</string>
+
+    <!--  Common error messages  -->
+    <string name="server_error">Server error occurred. Try it later</string>
+    <string name="unknown_error">Error occurred. Try it later</string>
+    <string name="response_timeout_error">Response timeout limit reached. Check your network connection</string>
+    <string name="internet_connection_error">No access to the Internet. Check your network connection</string>
 </resources>

@@ -40,3 +40,4 @@ include(
     ":features:login:domain",
     ":features:login:ui"
 )
+include(":core:domain")

@@ -1,5 +1,6 @@
 package com.pukachkosnt.babyeye.features.login.ui.composables.signup
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -30,16 +31,25 @@ import com.pukachkosnt.babyeye.core.commonui.utils.res.getStringOrEmpty
 import com.pukachkosnt.babyeye.core.commonui.validators.model.ValidModel
 import com.pukachkosnt.babyeye.features.login.ui.R
 import com.pukachkosnt.babyeye.features.login.ui.composables.LoginButton
+import com.pukachkosnt.babyeye.features.login.ui.composables.signup.models.UiSignUpModel
 import com.pukachkosnt.babyeye.core.commonui.R as CR
 
 @Composable
-internal fun SignUpInputForm(goToSignIn: () -> Unit) {
+internal fun SignUpInputForm(
+    onSignUpButtonClick: (signUpUiModel: UiSignUpModel) -> Unit,
+    goToSignIn: () -> Unit,
+    errorText: String? = null
+) {
     val focusManager = LocalFocusManager.current
     val spaceBetweenElements = dimensionResource(id = CR.dimen.padding_extra_small)
 
     Card(
         elevation = dimensionResource(id = CR.dimen.middle_card_elevation),
-        shape = RoundedCornerShape(dimensionResource(id = CR.dimen.middle_card_corner_radius))
+        shape = RoundedCornerShape(dimensionResource(id = CR.dimen.middle_card_corner_radius)),
+        border = BorderStroke(
+            width = 1.dp,
+            color = if (errorText == null) MaterialTheme.colors.background else MaterialTheme.colors.error
+        )
     ) {
         val signUpState = rememberSignUpState()
 
@@ -73,7 +83,11 @@ internal fun SignUpInputForm(goToSignIn: () -> Unit) {
 
             LoginButton(
                 text = R.string.signup,
-                onClick = { signUpState.validate(forceShowError = true) }
+                onClick = {
+                    if (signUpState.validate(forceShowError = true)) {
+                        onSignUpButtonClick(signUpState.uiSignUpModel)
+                    }
+                }
             )
 
             val validModel = signUpState.validModel.value
@@ -87,6 +101,10 @@ internal fun SignUpInputForm(goToSignIn: () -> Unit) {
             ) {
                 Text(text = stringResource(id = R.string.go_to_signin))
             }
+
+            if (errorText != null) {
+                ErrorLabel(text = errorText)
+            }
         }
     }
 }
@@ -96,7 +114,10 @@ internal fun SignUpInputForm(goToSignIn: () -> Unit) {
 private fun SignUpFormPreview() {
     MaterialTheme {
         Box(modifier = Modifier.padding(8.dp)) {
-            SignUpInputForm {}
+            SignUpInputForm(
+                onSignUpButtonClick = { },
+                goToSignIn = { }
+            )
         }
     }
 }

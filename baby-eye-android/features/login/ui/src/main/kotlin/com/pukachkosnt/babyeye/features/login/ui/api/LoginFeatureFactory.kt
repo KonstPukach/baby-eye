@@ -22,10 +22,7 @@ class LoginFeatureFactory @Inject constructor(
                 component.createLoginViewModel()
             }
 
-            LoginScreen(
-                loginViewModel = viewModel,
-                navController = loginDependencies.navController
-            )
+            LoginScreen(loginViewModel = viewModel)
         }
     }
 }

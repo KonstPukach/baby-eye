@@ -12,7 +12,7 @@ import com.pukachkosnt.babyeye.core.commonui.validators.model.ValidModel
 import com.pukachkosnt.babyeye.core.commonui.validators.model.ValidationPipeline
 import com.pukachkosnt.babyeye.features.login.ui.composables.signin.models.UiSignInModel
 
-class SignInState(
+internal class SignInState(
     val emailState: ValidatedTextInputFieldState,
     val passwordState: ValidatedTextInputFieldState,
     override val validationPipeline: ValidationPipeline<UiSignInModel, SignInState>
@@ -20,7 +20,7 @@ class SignInState(
 
     private val validatedStatesList = listOf(emailState, passwordState)
 
-    private val uiSignInModel: UiSignInModel
+    val uiSignInModel: UiSignInModel
         get() = UiSignInModel(email = emailState.text, password = passwordState.text)
 
     private val _validModel = mutableStateOf<ValidModel>(value = ValidModel.Valid)
@@ -43,7 +43,7 @@ class SignInState(
 }
 
 @Composable
-fun rememberSignInState(
+internal fun rememberSignInState(
     emailState: ValidatedTextInputFieldState = remember { ValidatedTextInputFieldState.email() },
     passwordState: ValidatedTextInputFieldState = remember { ValidatedTextInputFieldState.password() }
 ) = remember(emailState, passwordState) {
