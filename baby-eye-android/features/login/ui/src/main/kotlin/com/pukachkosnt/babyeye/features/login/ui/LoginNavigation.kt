@@ -1,10 +1,12 @@
 package com.pukachkosnt.babyeye.features.login.ui
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.pukachkosnt.babyeye.core.commonui.text_fields.Logo
 import com.pukachkosnt.babyeye.features.login.ui.composables.signin.SignInInputForm
 import com.pukachkosnt.babyeye.features.login.ui.composables.signup.SignUpInputForm
 
@@ -24,17 +26,29 @@ internal fun LoginNavHost(
         startDestination = SingInDestination
     ) {
         composable(SingInDestination) {
-            SignInInputForm(
-                onSignInButtonClick = loginViewModel::signIn,
-                goToSignUp = { loginNavController.navigate(SingUpDestination) },
-                errorText = errorText
+            AdjustedLoginLayout(
+                modifier = Modifier.fillMaxSize(),
+                logo = { Logo() },
+                inputForm = {
+                    SignInInputForm(
+                        onSignInButtonClick = loginViewModel::signIn,
+                        goToSignUp = { loginNavController.navigate(SingUpDestination) },
+                        errorText = errorText
+                    )
+                }
             )
         }
         composable(SingUpDestination) {
-            SignUpInputForm(
-                onSignUpButtonClick = loginViewModel::signUp,
-                goToSignIn = { loginNavController.navigateUp() },
-                errorText = errorText
+            AdjustedLoginLayout(
+                modifier = Modifier.fillMaxSize(),
+                logo = { Logo() },
+                inputForm = {
+                    SignUpInputForm(
+                        onSignUpButtonClick = loginViewModel::signUp,
+                        goToSignIn = { loginNavController.navigateUp() },
+                        errorText = errorText
+                    )
+                }
             )
         }
     }

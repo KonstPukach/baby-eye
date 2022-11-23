@@ -36,7 +36,11 @@ android {
         }
 
         getByName("release") {
-            buildConfigField(type = "String", name = "SERVER_URL", value = "TODO")
+            buildConfigField(
+                type = "String",
+                name = "SERVER_URL",
+                value =  buildProperties["releaseServerUrl"] as String
+            )
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

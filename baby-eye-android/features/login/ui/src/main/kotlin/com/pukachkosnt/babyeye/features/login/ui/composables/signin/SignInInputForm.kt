@@ -4,8 +4,10 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -48,6 +50,7 @@ internal fun SignInInputForm(
 
         Column(
             modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .wrapContentHeight()
                 .padding(
                     horizontal = dimensionResource(id = CR.dimen.padding_small),

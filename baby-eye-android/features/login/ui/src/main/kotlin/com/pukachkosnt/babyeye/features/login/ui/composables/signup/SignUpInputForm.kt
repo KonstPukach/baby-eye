@@ -1,12 +1,11 @@
 package com.pukachkosnt.babyeye.features.login.ui.composables.signup
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -44,6 +43,7 @@ internal fun SignUpInputForm(
     val spaceBetweenElements = dimensionResource(id = CR.dimen.padding_extra_small)
 
     Card(
+        modifier = Modifier.wrapContentSize(),
         elevation = dimensionResource(id = CR.dimen.middle_card_elevation),
         shape = RoundedCornerShape(dimensionResource(id = CR.dimen.middle_card_corner_radius)),
         border = BorderStroke(
@@ -55,6 +55,7 @@ internal fun SignUpInputForm(
 
         Column(
             modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .wrapContentHeight()
                 .padding(
                     horizontal = dimensionResource(id = CR.dimen.padding_small),
