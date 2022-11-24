@@ -58,7 +58,7 @@ internal fun SignInInputForm(
                 )
         ) {
             Headline(
-                text = R.string.signup,
+                text = R.string.signin,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 
