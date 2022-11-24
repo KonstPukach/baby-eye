@@ -11,6 +11,7 @@ import com.pukachkosnt.babyeye.features.login.domain.usecasesimpl.LoginUseCaseIm
 import com.pukachkosnt.babyeye.features.login.domain.usecasesimpl.RegisterUseCaseImpl
 import com.pukachkosnt.babyeye.features.login.ui.LoginUiErrorMapper
 import com.pukachkosnt.babyeye.features.login.ui.LoginViewModel
+import com.pukachkosnt.babyeye.features.login.ui.api.LoginCallback
 import com.pukachkosnt.babyeye.remote.networkingimpl.di.RetrofitServiceFactoryQualifier
 import com.pukachkosnt.babyeye.remote.networkingimpl.retrofit.ServiceFactory
 import dagger.Binds
@@ -41,8 +42,9 @@ internal interface LoginModule {
         fun provideViewModel(
             registerUseCase: RegisterUseCase,
             loginUseCase: LoginUseCase,
-            loginUiErrorMapper: UiErrorMapper
-        ): LoginViewModel = LoginViewModel(registerUseCase, loginUseCase, loginUiErrorMapper)
+            loginUiErrorMapper: UiErrorMapper,
+            loginCallback: LoginCallback
+        ) = LoginViewModel(registerUseCase, loginUseCase, loginUiErrorMapper, loginCallback)
 
         @Provides
         @LoginScreenScope

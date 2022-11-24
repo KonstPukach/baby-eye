@@ -8,5 +8,6 @@ import com.pukachkosnt.babyeye.remote.networkingimpl.retrofit.ServiceFactory
 interface LoginDependencies {
     val navController: NavHostController
     val tokenStore: TokenStore
+    val loginCallback: LoginCallback
     @RetrofitServiceFactoryQualifier fun retrofitServiceFactory(): ServiceFactory
 }

@@ -1,6 +1,7 @@
 package com.pukachkosnt.babyeye.di
 
 import androidx.navigation.NavHostController
+import com.pukachkosnt.babyeye.features.login.ui.api.LoginCallback
 import com.pukachkosnt.babyeye.features.login.ui.api.LoginDependencies
 import com.pukachkosnt.babyeye.features.login.ui.api.LoginFeatureFactory
 import dagger.BindsInstance
@@ -16,7 +17,10 @@ interface MainActivityComponent : LoginDependencies {
 
     @Subcomponent.Factory
     interface Factory {
-        fun create(@BindsInstance navController: NavHostController): MainActivityComponent
+        fun create(
+            @BindsInstance navController: NavHostController,
+            @BindsInstance loginCallback: LoginCallback
+        ): MainActivityComponent
     }
 
     fun createLoginFeatureFactory(): LoginFeatureFactory

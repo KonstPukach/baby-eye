@@ -9,7 +9,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.pukachkosnt.babyeye.core.navigation.featureMapOf
 import com.pukachkosnt.babyeye.core.navigation.fromFeatureMap
-import com.pukachkosnt.babyeye.navigation.AppDestinations.Login
+import com.pukachkosnt.babyeye.features.login.ui.api.LoginCallback
+import com.pukachkosnt.babyeye.navigation.AppDestinations.*
 import com.pukachkosnt.babyeye.ui.theme.BabyEyeTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,12 +24,17 @@ class MainActivity : ComponentActivity() {
             BabyEyeTheme {
                 val navController = rememberNavController()
 
+                val loginCallback = LoginCallback {
+                    // TODO: Go to Home screen
+                }
+
                 val mainComponent = appComponent
                     .mainActivityComponent()
-                    .create(navController)
+                    .create(navController, loginCallback)
 
                 val features = featureMapOf(
-                    Login to mainComponent.createLoginFeatureFactory()
+                    Login to mainComponent.createLoginFeatureFactory(),
+                    Home to mainComponent.createLoginFeatureFactory()
                 )
 
                 NavHost(navController = navController, startDestination = Login.route) {
