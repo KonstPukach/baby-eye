@@ -2,7 +2,7 @@ package com.pukachkosnt.babyeye.remote.networkingimpl.auth
 
 import android.content.SharedPreferences
 import com.pukachkosnt.babyeye.remote.networking.auth.TokenStore
-import com.pukachkosnt.babyeye.remote.networkingimpl.utils.failure
+import com.pukachkosnt.domain.*
 import javax.inject.Inject
 
 class PrefsTokenStore @Inject constructor(private val prefs: SharedPreferences) : TokenStore {
@@ -17,21 +17,21 @@ class PrefsTokenStore @Inject constructor(private val prefs: SharedPreferences) 
     override val refreshToken: String?
         get() = prefs.getString(REFRESH_TOKEN_KEY, null)
 
-    override fun saveToken(token: String): Result<Unit> {
+    override fun saveToken(token: String): Result<Unit, Error> {
         cachedToken = token
         return saveToPrefs(TOKEN_KEY, token)
     }
 
-    override fun saveRefreshToken(refreshToken: String): Result<Unit> {
+    override fun saveRefreshToken(refreshToken: String): Result<Unit, Error> {
         return saveToPrefs(REFRESH_TOKEN_KEY, refreshToken)
     }
 
-    private fun saveToPrefs(key: String, value: String): Result<Unit> {
+    private fun saveToPrefs(key: String, value: String): Result<Unit, Error> {
         val result = prefs.edit()
             .putString(key, value)
             .commit()
 
-        return if (result) Result.success(Unit) else Result.failure()
+        return if (result) Success(Unit) else Failure(TokenStoreError())
     }
 
     companion object {

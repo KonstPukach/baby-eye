@@ -53,6 +53,7 @@ dependencies {
     implementation(project(":remote:networking"))
     implementation(project(":core:navigation"))
     implementation(project(":core:di:core"))
+    implementation(project(":core:common-ui"))
 
     // Compose
     implementation("androidx.compose.ui:ui:$composeVersion")

@@ -31,7 +31,8 @@ include(
 
 include(
     ":core:navigation",
-    ":core:di:core"
+    ":core:di:core",
+    "core:common-ui"
 )
 
 include(
@@ -39,3 +40,4 @@ include(
     ":features:login:domain",
     ":features:login:ui"
 )
+include(":core:domain")

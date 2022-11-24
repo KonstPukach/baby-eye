@@ -103,6 +103,7 @@ dependencies {
     implementation(project(":core:di:core"))
     implementation(project(":remote:networking-impl"))
     implementation(project(":remote:networking"))
+    implementation(project(":core:common-ui"))
 
     // Core
     implementation("androidx.core:core-ktx:1.9.0")
