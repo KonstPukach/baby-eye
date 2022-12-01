@@ -16,7 +16,7 @@ namespace BabyEye.Utils
         public SymmetricSecurityKey SecurityKey 
         {
             get { 
-                return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configs["JWT:Secret"]));
+                return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configs["JWT:Secret"]));
             }
         }
        
@@ -32,7 +32,7 @@ namespace BabyEye.Utils
 
         public DateTime ExpirationTermHours
         {
-            get { return DateTime.Now.AddHours(int.Parse(_configs["JWT:ExpirationTermHours"])); }
+            get { return DateTime.Now.AddSeconds(int.Parse(_configs["JWT:ExpirationTermHours"])); }     // TODO
         }
     }
 }
