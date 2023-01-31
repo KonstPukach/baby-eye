@@ -37,7 +37,7 @@ android {
 
     signingConfigs {
         create("qa") {
-            storeFile     = file(qaKeystoreProperties.getProperty("qaSignKeystoreFile"))
+            storeFile     = qaKeystoreProperties.getProperty("qaSignKeystoreFile")?.let(::file)
             storePassword = qaKeystoreProperties.getProperty("qaSignKeystorePassword")
             keyAlias      = qaKeystoreProperties.getProperty("qaSignKeystoreKeyAlias")
             keyPassword   = qaKeystoreProperties.getProperty("qaSignKeyPassword")
