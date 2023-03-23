@@ -32,7 +32,9 @@ internal fun LoginNavHost(
                 inputForm = {
                     SignInInputForm(
                         onSignInButtonClick = loginViewModel::signIn,
-                        goToSignUp = { loginNavController.navigate(SingUpDestination) },
+                        goToSignUp = {
+                            loginNavController.navigate(SingUpDestination)
+                       },
                         errorText = errorText
                     )
                 }

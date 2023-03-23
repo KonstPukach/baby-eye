@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import com.pukachkosnt.babyeye.core.commonui.validators.model.ValidModel
 import com.pukachkosnt.babyeye.core.commonui.validators.model.ValidationPipeline
 
-
 class ValidatedTextInputFieldState(
     override val validationPipeline: ValidationPipeline<String, ValidatedTextInputFieldState>
 ) : IValidatedTextInputFieldState<String>() {

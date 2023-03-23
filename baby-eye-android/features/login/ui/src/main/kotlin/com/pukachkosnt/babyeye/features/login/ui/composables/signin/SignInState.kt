@@ -1,9 +1,11 @@
 package com.pukachkosnt.babyeye.features.login.ui.composables.signin
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import com.pukachkosnt.babyeye.core.commonui.input_fields.email
 import com.pukachkosnt.babyeye.core.commonui.input_fields.password
 import com.pukachkosnt.babyeye.core.commonui.input_fields.states.ValidatedState
@@ -16,7 +18,7 @@ internal class SignInState(
     val emailState: ValidatedTextInputFieldState,
     val passwordState: ValidatedTextInputFieldState,
     override val validationPipeline: ValidationPipeline<UiSignInModel, SignInState>
-) : ValidatedState<UiSignInModel> {
+) : ValidatedState<UiSignInModel>, Parcelable {
 
     private val validatedStatesList = listOf(emailState, passwordState)
 
@@ -40,12 +42,33 @@ internal class SignInState(
 
         return _validModel.value.isValid && areStatesValid
     }
+
+    // ############### PARCELABLE IMPLEMENTATION ###############
+
+    @Suppress("DEPRECATION")
+    private constructor(parcel: Parcel) : this(
+        requireNotNull(parcel.readParcelable(ValidatedTextInputFieldState::class.java.classLoader)),
+        requireNotNull(parcel.readParcelable(ValidatedTextInputFieldState::class.java.classLoader)),
+        ValidationPipeline()
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeParcelable(emailState, flags)
+        parcel.writeParcelable(passwordState, flags)
+    }
+
+    override fun describeContents(): Int = 0
+
+    companion object CREATOR : Parcelable.Creator<SignInState> {
+        override fun createFromParcel(parcel: Parcel): SignInState = SignInState(parcel)
+        override fun newArray(size: Int): Array<SignInState?> = arrayOfNulls(size)
+    }
 }
 
 @Composable
 internal fun rememberSignInState(
-    emailState: ValidatedTextInputFieldState = remember { ValidatedTextInputFieldState.email() },
-    passwordState: ValidatedTextInputFieldState = remember { ValidatedTextInputFieldState.password() }
-) = remember(emailState, passwordState) {
+    emailState: ValidatedTextInputFieldState = rememberSaveable { ValidatedTextInputFieldState.email() },
+    passwordState: ValidatedTextInputFieldState = rememberSaveable { ValidatedTextInputFieldState.password() }
+) = rememberSaveable(emailState, passwordState) {
     SignInState(emailState, passwordState, ValidationPipeline())
 }

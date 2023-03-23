@@ -1,9 +1,10 @@
 buildscript {
     extra.apply {
-        set("composeVersion", "1.3.0")
-        set("composeCompilerVersion", "1.3.1")
+        set("composeVersion", "1.3.2")
+        set("composeMaterialVersion", "1.3.1")
+        set("composeCompilerVersion", "1.3.2")
         set("daggerVersion", "2.44")
-        set("navigationVersion", "2.5.2")
+        set("navigationVersion", "2.5.3")
     }
 
     dependencies {
@@ -18,8 +19,18 @@ buildscript {
 plugins {
     id("com.android.application") version("7.2.1") apply false
     id("com.android.library") version("7.2.1") apply false
-    id("org.jetbrains.kotlin.android") version("1.7.10") apply false
-    id("org.jetbrains.kotlin.jvm") version("1.7.10") apply false
+    id("org.jetbrains.kotlin.android") version("1.7.20") apply false
+    id("org.jetbrains.kotlin.jvm") version("1.7.20") apply false
+}
+
+allprojects {
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = freeCompilerArgs + listOf(
+                "-opt-in=androidx.compose.animation.ExperimentalAnimationApi",
+            )
+        }
+    }
 }
 
 tasks.register("clean", Delete::class) {
