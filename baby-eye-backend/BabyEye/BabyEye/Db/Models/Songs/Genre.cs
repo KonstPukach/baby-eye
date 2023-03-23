@@ -12,5 +12,7 @@ namespace BabyEye.Db.Models.Songs
         [Required]
         [Column(TypeName = "nvarchar(128)")]
         public string Name { get; set; }
+
+        public List<Song> Songs { get; set; } = new();
     }
 }

@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\html\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://blockprotocol.org/schemas/block-metadata.json" /></VisualStudio></ProjectExtensions>

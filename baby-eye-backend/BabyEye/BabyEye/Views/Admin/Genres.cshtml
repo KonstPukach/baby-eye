@@ -1,0 +1,21 @@
+﻿<div class="container">
+    <div class="input-group input-group-lg mb-3 py-5">
+        <input id="new-genre-input" type="text" class="form-control" placeholder="Genre name" aria-label="Genre name" aria-describedby="basic-addon2">
+        <div class="input-group-append input-group-lg">
+            <button onclick="createGenre()" class="btn btn-outline-secondary" type="button">Save</button>
+        </div>
+    </div>
+
+    <ul id="genres-list" class="list-group">
+    </ul>
+
+    <div class="d-flex justify-content-center">
+        <div id="spinner"  class="spinner-border" role="status">
+            <span class="visually-hidden">Загрузка...</span>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/genres.js"></script>
+}

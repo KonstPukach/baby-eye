@@ -1,0 +1,50 @@
+﻿@page
+@model BabyEye.Views.Admin.AdminMusicPageModel
+
+<div class="row">
+    <div class="col-sm-6 my-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Authors</h5>
+                <p class="card-text">Solo musicians or groups</p>
+                <a href="#" class="btn btn-primary">Edit</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 my-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Songs</h5>
+                <p class="card-text">Here is only song names and descriptions, but no records</p>
+                <a href="#" class="btn btn-primary">Edit</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 my-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Albums</h5>
+                <p class="card-text">Albums that are referensed by songs</p>
+                <a href="#" class="btn btn-primary">Edit</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 my-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Genres</h5>
+                <p class="card-text">Different music genres. Don't combine genres like "pop-rock", it is 2 separate genres</p>
+                <a class="btn btn-primary" asp-controller="AdminMusic" asp-action="Genres">Edit</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 my-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Songs Fragments</h5>
+                <p class="card-text">Truncated songs records with fixed length</p>
+                <a href="#" class="btn btn-primary">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>

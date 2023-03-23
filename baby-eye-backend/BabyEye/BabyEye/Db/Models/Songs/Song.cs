@@ -12,8 +12,7 @@ namespace BabyEye.Db.Models.Songs
         [Column(TypeName = "varchar(256)")]
         public string Name { get; set; }
 
-        public short? GenreId { get; set; }
-        public Genre? Genre { get; set; }
+        public List<Genre> Genres { get; set; } = new();
 
         public List<Author> Authors { get; set; } = new();
 

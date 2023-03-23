@@ -14,3 +14,31 @@ build_property.SupportLocalizedComponentNames =
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = D:\baby-eye\baby-eye-backend\BabyEye\BabyEye
 build_property._RazorSourceGeneratorDebug = 
+
+[D:/baby-eye/baby-eye-backend/BabyEye/BabyEye/Views/Admin/AdminMusicPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5NdXNpY1BhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/baby-eye/baby-eye-backend/BabyEye/BabyEye/Views/Admin/Genres.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cR2VucmVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/baby-eye/baby-eye-backend/BabyEye/BabyEye/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/baby-eye/baby-eye-backend/BabyEye/BabyEye/Views/Admin/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/baby-eye/baby-eye-backend/BabyEye/BabyEye/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/baby-eye/baby-eye-backend/BabyEye/BabyEye/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/baby-eye/baby-eye-backend/BabyEye/BabyEye/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

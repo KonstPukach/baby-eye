@@ -117,9 +117,6 @@ namespace BabyEye.Migrations
                     b.Property<int?>("AlbumId")
                         .HasColumnType("int");
 
-                    b.Property<short?>("GenreId")
-                        .HasColumnType("smallint");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(256)");
@@ -127,8 +124,6 @@ namespace BabyEye.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
-
-                    b.HasIndex("GenreId");
 
                     b.ToTable("Songs");
                 });
@@ -253,6 +248,21 @@ namespace BabyEye.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("GenreSong", b =>
+                {
+                    b.Property<short>("GenresId")
+                        .HasColumnType("smallint");
+
+                    b.Property<int>("SongsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GenresId", "SongsId");
+
+                    b.HasIndex("SongsId");
+
+                    b.ToTable("GenreSong");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -424,13 +434,7 @@ namespace BabyEye.Migrations
                         .WithMany("Songs")
                         .HasForeignKey("AlbumId");
 
-                    b.HasOne("BabyEye.Db.Models.Songs.Genre", "Genre")
-                        .WithMany()
-                        .HasForeignKey("GenreId");
-
                     b.Navigation("Album");
-
-                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("BabyEye.Db.Models.Songs.SongFragment", b =>
@@ -451,6 +455,21 @@ namespace BabyEye.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GenreSong", b =>
+                {
+                    b.HasOne("BabyEye.Db.Models.Songs.Genre", null)
+                        .WithMany()
+                        .HasForeignKey("GenresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BabyEye.Db.Models.Songs.Song", null)
+                        .WithMany()
+                        .HasForeignKey("SongsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

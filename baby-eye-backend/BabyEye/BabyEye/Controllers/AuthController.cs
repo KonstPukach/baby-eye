@@ -4,8 +4,6 @@ using BabyEye.Models.Response;
 using BabyEye.Repositories;
 using BabyEye.Security;
 using BabyEye.Security.TokenValidation;
-using BabyEye.Utils;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
@@ -59,8 +57,9 @@ namespace BabyEye.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
+            var addRoleResult = await _userManager.AddToRoleAsync(user, UserRole.User.Name);
 
-            if (result.Succeeded)
+            if (result.Succeeded && addRoleResult.Succeeded)
             {
                 var response = await CreateAuthResponse(user);
                 return Ok(response);
