@@ -5,6 +5,7 @@ plugins {
 }
 
 val composeCompilerVersion: String by rootProject.extra
+val composeMaterialVersion: String by rootProject.extra
 val composeVersion: String by rootProject.extra
 val daggerVersion: String by rootProject.extra
 
@@ -57,7 +58,7 @@ dependencies {
 
     // Compose
     implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.material:material:$composeMaterialVersion")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
 
     // Android

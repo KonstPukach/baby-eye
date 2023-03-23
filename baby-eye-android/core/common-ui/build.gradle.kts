@@ -1,10 +1,12 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("kotlin-parcelize")
 }
 
 val composeCompilerVersion: String by rootProject.extra
 val composeVersion: String by rootProject.extra
+val composeMaterialVersion: String by rootProject.extra
 
 android {
     namespace = "com.pukachkosnt.babyeye.core.commonui"
@@ -45,7 +47,7 @@ dependencies {
     implementation(project(":core:domain"))
     // Compose
     implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.material:material:$composeMaterialVersion")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
