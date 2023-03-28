@@ -4,6 +4,9 @@ buildscript {
         set("composeCompilerVersion", "1.3.1")
         set("daggerVersion", "2.44")
         set("navigationVersion", "2.5.2")
+        set("androidxVersion", "1.9.0")
+        set("lifecycleViewModelVersion", "2.5.1")
+        set("coroutinesVersion", "1.6.4")
     }
 
     dependencies {
