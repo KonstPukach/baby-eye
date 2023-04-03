@@ -1,8 +1,7 @@
 package com.pukachkosnt.babyeye.core.di.core
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 /**
@@ -21,4 +20,32 @@ inline fun <reified T: ViewModel> injectViewModel(
             return viewModelFactory() as VM
         }
     }
+)
+
+@Composable
+inline fun <reified T : ViewModel> injectSavedStateViewModel(
+    key: String? = null,
+    crossinline viewModelFactory: (handle: SavedStateHandle) -> T
+): T = viewModel(
+    modelClass = T::class.java,
+    key = key,
+    factory = object : AbstractSavedStateViewModelFactory() {
+        @Suppress("UNCHECKED_CAST")
+        override fun <VM : ViewModel> create(
+            key: String,
+            modelClass: Class<VM>,
+            handle: SavedStateHandle
+        ): VM {
+            return viewModelFactory.invoke(handle) as VM
+        }
+    }
+)
+
+@Composable
+inline fun <reified T : ViewModel> injectSavedStateViewModel(
+    key: String? = null,
+    viewModelFactory: AssistedSavedStateVMFactory<T>
+): T = injectSavedStateViewModel(
+    key = key,
+    viewModelFactory = viewModelFactory::create
 )
