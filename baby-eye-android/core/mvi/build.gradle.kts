@@ -36,6 +36,8 @@ dependencies {
     implementation("androidx.core:core-ktx:$androidxVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleViewModelVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleViewModelVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleViewModelVersion")
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     testImplementation("junit:junit:4.13.2")
