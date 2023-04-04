@@ -9,5 +9,7 @@ interface LoginDependencies {
     val navController: NavHostController
     val tokenStore: TokenStore
     val loginCallback: LoginCallback
-    @RetrofitServiceFactoryQualifier fun retrofitServiceFactory(): ServiceFactory
+
+    @RetrofitServiceFactoryQualifier
+    fun retrofitServiceFactory(): ServiceFactory
 }

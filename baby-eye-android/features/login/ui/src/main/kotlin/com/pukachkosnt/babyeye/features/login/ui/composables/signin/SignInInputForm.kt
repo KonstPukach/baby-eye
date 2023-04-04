@@ -65,8 +65,8 @@ internal fun SignInInputForm(
 
     Card(
         elevation = dimensionResource(id = CR.dimen.middle_card_elevation),
-        shape = RoundedCornerShape(dimensionResource(id = CR.dimen.middle_card_corner_radius)),
-        border = BorderStroke(
+        shape     = RoundedCornerShape(dimensionResource(id = CR.dimen.middle_card_corner_radius)),
+        border    = BorderStroke(
             width = 1.dp,
             color = if (state.responseError == null) MaterialTheme.colors.background
                     else MaterialTheme.colors.error
@@ -78,58 +78,58 @@ internal fun SignInInputForm(
                 .wrapContentHeight()
                 .padding(
                     horizontal = dimensionResource(id = CR.dimen.padding_small),
-                    vertical = dimensionResource(id = CR.dimen.padding_medium)
+                    vertical   = dimensionResource(id = CR.dimen.padding_medium)
                 )
         ) {
             var emailFieldUnfocusCounter by remember { mutableStateOf(0) }
             var passwordFieldUnfocusCounter by remember { mutableStateOf(0) }
 
             Headline(
-                text = R.string.signin,
+                text     = R.string.signin,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 
             EmailInputField(
-                modifier = Modifier.padding(top = spaceBetweenElements),
-                value = state.email.value,
-                onValueChange = signInViewModel::onEmailFieldChanged,
-                onFocusChanged = { isFocused ->
+                modifier        = Modifier.padding(top = spaceBetweenElements),
+                value           = state.email.value,
+                onValueChange   = signInViewModel::onEmailFieldChanged,
+                onFocusChanged  = { isFocused ->
                     if (!isFocused && ++emailFieldUnfocusCounter > 1) {
                         signInViewModel.onEmailFieldVisited()
                     }
                 },
-                errorText = state.email.validationResult.errorText?.string()?.takeIf {
+                errorText       = state.email.validationResult.errorText?.string()?.takeIf {
                     state.email.showError
                 },
-                imeAction = ImeAction.Next,
+                imeAction       = ImeAction.Next,
                 keyboardActions = KeyboardActions.next {
                     focusManager.moveFocus(FocusDirection.Down)
                 }
             )
 
             PasswordInputField(
-                value = state.password.value,
-                onValueChange = signInViewModel::onPasswordFieldChanged,
-                onFocusChanged = { isFocused ->
+                value           = state.password.value,
+                onValueChange   = signInViewModel::onPasswordFieldChanged,
+                onFocusChanged  = { isFocused ->
                     if (!isFocused && ++passwordFieldUnfocusCounter > 1) {
                         signInViewModel.onPasswordFieldVisited()
                     }
                 },
-                errorText = state.password.validationResult.errorText?.string()?.takeIf {
+                errorText       = state.password.validationResult.errorText?.string()?.takeIf {
                     state.password.showError
                 },
-                imeAction = ImeAction.Done,
+                imeAction       = ImeAction.Done,
                 keyboardActions = KeyboardActions { focusManager.clearFocus() }
             )
 
             LoginButton(
-                text = R.string.signin,
+                text    = R.string.signin,
                 onClick = signInViewModel::signIn
             )
 
             TextButton(
                 modifier = Modifier.align(Alignment.End),
-                onClick = goToSignUp
+                onClick  = goToSignUp
             ) {
                 Text(text = stringResource(id = R.string.go_to_signup))
             }

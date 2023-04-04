@@ -10,9 +10,9 @@ import androidx.compose.ui.res.stringResource
 @Composable
 fun Headline(text: String, modifier: Modifier = Modifier) {
     Text(
-        text = text,
+        text     = text,
         modifier = modifier,
-        style = MaterialTheme.typography.h6
+        style    = MaterialTheme.typography.h6
     )
 }
 

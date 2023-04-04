@@ -30,8 +30,14 @@ fun CircularProgressScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun CircularProgressScreenPreview() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
-        Text(text = "Text example", style = MaterialTheme.typography.h3)
+    Box(
+        modifier         = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.TopCenter
+    ) {
+        Text(
+            text  = "Text example",
+            style = MaterialTheme.typography.h3
+        )
         CircularProgressScreen(modifier = Modifier.fillMaxSize())
     }
 }

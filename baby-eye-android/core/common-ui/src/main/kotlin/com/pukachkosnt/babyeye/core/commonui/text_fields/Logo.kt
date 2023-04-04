@@ -11,7 +11,7 @@ import com.pukachkosnt.babyeye.core.commonui.R
 fun Logo(modifier: Modifier = Modifier) {
     Text(
         modifier = modifier,
-        text = stringResource(id = R.string.babyeye).uppercase(),
-        style = MaterialTheme.typography.h2
+        text     = stringResource(id = R.string.babyeye).uppercase(),
+        style    = MaterialTheme.typography.h2
     )
 }

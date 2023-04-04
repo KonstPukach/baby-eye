@@ -113,10 +113,10 @@ internal interface LoginModule {
         ): AssistedSavedStateVMFactory<SignInViewModel> {
             return AssistedSavedStateVMFactory { savedStateHandle ->
                 SignInViewModel(
-                    signInReducer = signInReducer,
+                    signInReducer     = signInReducer,
                     signInNewsReducer = signInNewsReducer,
-                    signInActor = signInActor,
-                    savedState = savedStateHandle
+                    signInActor       = signInActor,
+                    savedState        = savedStateHandle
                 )
             }
         }
@@ -130,10 +130,10 @@ internal interface LoginModule {
         ): AssistedSavedStateVMFactory<SignUpViewModel> {
             return AssistedSavedStateVMFactory { savedStateHandle ->
                 SignUpViewModel(
-                    signUpReducer = signUpReducer,
+                    signUpReducer     = signUpReducer,
                     signUpNewsReducer = signUpNewsReducer,
-                    signUpActor = signUpActor,
-                    savedState = savedStateHandle
+                    signUpActor       = signUpActor,
+                    savedState        = savedStateHandle
                 )
             }
         }
