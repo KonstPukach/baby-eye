@@ -2,8 +2,9 @@ package com.pukachkosnt.babyeye.core.commonui.utils.res
 
 import android.content.Context
 import androidx.annotation.StringRes
+import java.io.Serializable
 
-interface StringResourceLocator {
+interface StringResourceLocator : Serializable {
     fun getString(context: Context): String
 
     companion object {

@@ -1,6 +1,7 @@
 package com.pukachkosnt.babyeye.core.commonui.widgets
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.CircularProgressIndicator
@@ -17,7 +18,9 @@ private val SemiTransparentColor = Color(0xCCFFFFFF) // 80% transparent white co
 @Composable
 fun CircularProgressScreen(modifier: Modifier = Modifier) {
     Box(
-        modifier = modifier.background(SemiTransparentColor),
+        modifier = modifier
+            .background(SemiTransparentColor)
+            .clickable(enabled = false) { },//
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()

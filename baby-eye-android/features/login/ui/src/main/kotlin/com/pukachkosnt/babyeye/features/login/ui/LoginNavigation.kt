@@ -3,50 +3,61 @@ package com.pukachkosnt.babyeye.features.login.ui
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import com.pukachkosnt.babyeye.core.commonui.text_fields.Logo
+import com.pukachkosnt.babyeye.core.navigation.animation.*
 import com.pukachkosnt.babyeye.features.login.ui.composables.signin.SignInInputForm
 import com.pukachkosnt.babyeye.features.login.ui.composables.signup.SignUpInputForm
+import com.pukachkosnt.babyeye.features.login.ui.vm.SignInViewModel
+import com.pukachkosnt.babyeye.features.login.ui.vm.SignUpViewModel
 
 internal const val SingInDestination = "sign-in"
 internal const val SingUpDestination = "sign-up"
 
 @Composable
 internal fun LoginNavHost(
-    loginViewModel: LoginViewModel,
-    loginNavController: NavHostController,
+    signInViewModel: SignInViewModel,
+    signUpViewModel: SignUpViewModel,
+    loginNavController: AnimatedNavHostController,
     modifier: Modifier = Modifier,
-    errorText: String? = null
+    showLoadingScreen: (Boolean) -> Unit
 ) {
-    NavHost(
+    AnimatedNavHost(
         modifier = modifier,
         navController = loginNavController,
         startDestination = SingInDestination
     ) {
-        composable(SingInDestination) {
+        animatedComposable(SingInDestination) {
             AdjustedLoginLayout(
                 modifier = Modifier.fillMaxSize(),
                 logo = { Logo() },
                 inputForm = {
                     SignInInputForm(
-                        onSignInButtonClick = loginViewModel::signIn,
-                        goToSignUp = { loginNavController.navigate(SingUpDestination) },
-                        errorText = errorText
+                        goToSignUp = {
+                            loginNavController.navigateWithAnim(
+                                route = SingUpDestination,
+                                composeAnimOptions = ComposeNavAnimOptions(
+                                    enterAnim = { c, o -> SlideFromRight(c, o) },
+                                    exitAnim = { c, o -> SlideToLeft(c, o) },
+                                    popEnterAnim = { c, o -> SlideFromLeft(c, o) },
+                                    popExitAnim = { c, o -> SlideToRight(c, o) }
+                                )
+                            )
+                         },
+                        signInViewModel = signInViewModel,
+                        showLoadingScreen = showLoadingScreen
                     )
                 }
             )
         }
-        composable(SingUpDestination) {
+        animatedComposable(SingUpDestination) {
             AdjustedLoginLayout(
                 modifier = Modifier.fillMaxSize(),
                 logo = { Logo() },
                 inputForm = {
                     SignUpInputForm(
-                        onSignUpButtonClick = loginViewModel::signUp,
                         goToSignIn = { loginNavController.navigateUp() },
-                        errorText = errorText
+                        signUpViewModel = signUpViewModel,
+                        showLoadingScreen = showLoadingScreen
                     )
                 }
             )

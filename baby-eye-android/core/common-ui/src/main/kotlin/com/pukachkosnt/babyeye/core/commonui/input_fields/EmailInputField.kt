@@ -17,27 +17,25 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pukachkosnt.babyeye.core.commonui.R
-import com.pukachkosnt.babyeye.core.commonui.input_fields.show_err_strategy.CommonTextInputFieldShowErrorStrategy
-import com.pukachkosnt.babyeye.core.commonui.input_fields.show_err_strategy.ShowErrorStrategy
-import com.pukachkosnt.babyeye.core.commonui.input_fields.states.ValidatedTextInputFieldState
 import com.pukachkosnt.babyeye.core.commonui.utils.compose.Email
-import com.pukachkosnt.babyeye.core.commonui.validators.EmailInputFieldValidator
-import com.pukachkosnt.babyeye.core.commonui.validators.EmptyInputFieldValidator
-import com.pukachkosnt.babyeye.core.commonui.validators.model.ValidationPipeline
 
 @Composable
 fun EmailInputField(
-    emailState: ValidatedTextInputFieldState,
     modifier: Modifier = Modifier,
+    value: String = "",
+    onValueChange: (String) -> Unit = { },
+    onFocusChanged: (Boolean) -> Unit = { },
+    errorText: String? = null,
     labelText: String = stringResource(id = R.string.email),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    imeAction: ImeAction = ImeAction.Default,
-    onValueChange: (String) -> Unit = { },
+    imeAction: ImeAction = ImeAction.Default
 ) {
     ValidatedTextInputField(
-        textInputFieldState = emailState,
-        onValueChange = onValueChange,
         modifier = modifier,
+        value = value,
+        errorText = errorText,
+        onValueChange = onValueChange,
+        onFocusChanged = onFocusChanged,
         textStyle = MaterialTheme.typography.body2,
         keyboardOptions = KeyboardOptions.Email.copy(imeAction = imeAction),
         keyboardActions = keyboardActions,
@@ -53,12 +51,6 @@ fun EmailInputField(
     )
 }
 
-fun ValidatedTextInputFieldState.Companion.email()
-    = ValidatedTextInputFieldState(ValidationPipeline.from(
-    EmptyInputFieldValidator() to ShowErrorStrategy { it.isFocusedAtLeastOneTime },
-    EmailInputFieldValidator() to CommonTextInputFieldShowErrorStrategy
-))
-
 // ########################   PREVIEW   ########################
 
 @Preview
@@ -67,16 +59,6 @@ private fun EmailPreview() {
     MaterialTheme {
         Column {
             EmailInputField(
-                emailState = ValidatedTextInputFieldState.email()
-                    .apply {
-                        text = "example@mail.com"
-                    },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp)
-            )
-            EmailInputField(
-                emailState = ValidatedTextInputFieldState.email(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp)

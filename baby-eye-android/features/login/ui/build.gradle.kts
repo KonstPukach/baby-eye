@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
     kotlin("kapt")
 }
 
@@ -54,6 +55,7 @@ dependencies {
     implementation(project(":core:navigation"))
     implementation(project(":core:di:core"))
     implementation(project(":core:common-ui"))
+    implementation(project(":core:mvi"))
 
     // Compose
     implementation("androidx.compose.ui:ui:$composeVersion")
