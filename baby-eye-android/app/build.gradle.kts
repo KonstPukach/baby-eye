@@ -12,6 +12,7 @@ plugins {
 val composeCompilerVersion: String by rootProject.extra
 val composeVersion: String by rootProject.extra
 val daggerVersion: String by rootProject.extra
+val lifecycleViewModelVersion: String by rootProject.extra
 
 val qaKeystoreProperties = Properties().apply {
     load(FileInputStream(rootProject.file("local.properties")))
@@ -115,7 +116,7 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.6.0")
 
     // Android
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleViewModelVersion")
 
     // DI - Dagger 2
     implementation("com.google.dagger:dagger:$daggerVersion")

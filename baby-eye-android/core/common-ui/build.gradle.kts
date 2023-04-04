@@ -6,6 +6,7 @@ plugins {
 
 val composeCompilerVersion: String by rootProject.extra
 val composeVersion: String by rootProject.extra
+val lifecycleViewModelVersion: String by rootProject.extra
 
 android {
     namespace = "com.pukachkosnt.babyeye.core.commonui"
@@ -43,11 +44,15 @@ android {
 }
 
 dependencies {
+    // Project modules dependencies
     implementation(project(":core:domain"))
+
     // Compose
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
+
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleViewModelVersion")
 }

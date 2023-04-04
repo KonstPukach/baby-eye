@@ -44,6 +44,7 @@ android {
     }
 }
 dependencies {
+    // Navigation
     api("androidx.navigation:navigation-common-ktx:$navigationVersion")
     api("androidx.navigation:navigation-runtime-ktx:$navigationVersion")
     api("androidx.navigation:navigation-compose:$navigationVersion")

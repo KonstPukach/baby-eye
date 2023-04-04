@@ -33,12 +33,18 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:$androidxVersion")
+    // Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+
+    // Android
+    implementation("androidx.core:core-ktx:$androidxVersion")
+
+    // Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleViewModelVersion")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleViewModelVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleViewModelVersion")
 
+    // Tests
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     testImplementation("junit:junit:4.13.2")
 }
