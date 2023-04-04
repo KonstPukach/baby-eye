@@ -32,7 +32,8 @@ include(
 include(
     ":core:navigation",
     ":core:di:core",
-    "core:common-ui"
+    "core:common-ui",
+    ":core:mvi"
 )
 
 include(

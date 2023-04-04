@@ -1,5 +1,7 @@
 package com.pukachkosnt.babyeye.features.login.ui.composables.signin
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -12,45 +14,64 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pukachkosnt.babyeye.core.commonui.input_fields.EmailInputField
 import com.pukachkosnt.babyeye.core.commonui.input_fields.PasswordInputField
 import com.pukachkosnt.babyeye.core.commonui.text_fields.ErrorLabel
 import com.pukachkosnt.babyeye.core.commonui.text_fields.Headline
 import com.pukachkosnt.babyeye.core.commonui.utils.compose.next
+import com.pukachkosnt.babyeye.core.commonui.utils.compose.string
 import com.pukachkosnt.babyeye.features.login.ui.R
 import com.pukachkosnt.babyeye.features.login.ui.composables.LoginButton
-import com.pukachkosnt.babyeye.features.login.ui.composables.signin.models.UiSignInModel
+import com.pukachkosnt.babyeye.features.login.ui.mvi.textIfToast
+import com.pukachkosnt.babyeye.features.login.ui.mvi.textUnlessToast
+import com.pukachkosnt.babyeye.features.login.ui.vm.SignInViewModel
 import com.pukachkosnt.babyeye.core.commonui.R as CR
 
 @Composable
 internal fun SignInInputForm(
-    onSignInButtonClick: (signInUiModel: UiSignInModel) -> Unit,
     goToSignUp: () -> Unit,
-    errorText: String? = null
+    signInViewModel: SignInViewModel,
+    showLoadingScreen: (Boolean) -> Unit
 ) {
+    val state by signInViewModel.state.collectAsState()
+    val showToastMsg by rememberUpdatedState(::showToast)
+
+    val context = LocalContext.current
     val focusManager = LocalFocusManager.current
+
     val spaceBetweenElements = dimensionResource(id = CR.dimen.padding_extra_small)
+
+    showLoadingScreen(state.showLoadingScreen)
+
+    if (state.showLoadingScreen) {
+        focusManager.clearFocus(force = true)
+    }
+
+    state.responseError?.textIfToast?.string()?.let { globalErrorText ->
+        LaunchedEffect(state.responseError) {
+            showToastMsg(context, globalErrorText)
+        }
+    }
 
     Card(
         elevation = dimensionResource(id = CR.dimen.middle_card_elevation),
         shape = RoundedCornerShape(dimensionResource(id = CR.dimen.middle_card_corner_radius)),
         border = BorderStroke(
             width = 1.dp,
-            color = if (errorText == null) MaterialTheme.colors.background else MaterialTheme.colors.error
+            color = if (state.responseError == null) MaterialTheme.colors.background
+                    else MaterialTheme.colors.error
         )
     ) {
-        val signInState = rememberSignInState()
-
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
@@ -60,14 +81,26 @@ internal fun SignInInputForm(
                     vertical = dimensionResource(id = CR.dimen.padding_medium)
                 )
         ) {
+            var emailFieldUnfocusCounter by remember { mutableStateOf(0) }
+            var passwordFieldUnfocusCounter by remember { mutableStateOf(0) }
+
             Headline(
                 text = R.string.signin,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 
             EmailInputField(
-                emailState = signInState.emailState,
                 modifier = Modifier.padding(top = spaceBetweenElements),
+                value = state.email.value,
+                onValueChange = signInViewModel::onEmailFieldChanged,
+                onFocusChanged = { isFocused ->
+                    if (!isFocused && ++emailFieldUnfocusCounter > 1) {
+                        signInViewModel.onEmailFieldVisited()
+                    }
+                },
+                errorText = state.email.validationResult.errorText?.string()?.takeIf {
+                    state.email.showError
+                },
                 imeAction = ImeAction.Next,
                 keyboardActions = KeyboardActions.next {
                     focusManager.moveFocus(FocusDirection.Down)
@@ -75,20 +108,23 @@ internal fun SignInInputForm(
             )
 
             PasswordInputField(
-                passwordState = signInState.passwordState,
+                value = state.password.value,
+                onValueChange = signInViewModel::onPasswordFieldChanged,
+                onFocusChanged = { isFocused ->
+                    if (!isFocused && ++passwordFieldUnfocusCounter > 1) {
+                        signInViewModel.onPasswordFieldVisited()
+                    }
+                },
+                errorText = state.password.validationResult.errorText?.string()?.takeIf {
+                    state.password.showError
+                },
                 imeAction = ImeAction.Done,
-                keyboardActions = KeyboardActions {
-                    focusManager.clearFocus()
-                }
+                keyboardActions = KeyboardActions { focusManager.clearFocus() }
             )
 
             LoginButton(
                 text = R.string.signin,
-                onClick = {
-                    if (signInState.validate(forceShowError = true)) {
-                        onSignInButtonClick(signInState.uiSignInModel)
-                    }
-                }
+                onClick = signInViewModel::signIn
             )
 
             TextButton(
@@ -98,18 +134,13 @@ internal fun SignInInputForm(
                 Text(text = stringResource(id = R.string.go_to_signup))
             }
 
-            if (errorText != null) {
-                ErrorLabel(text = errorText)
+            state.responseError?.textUnlessToast?.let { errorText ->
+                ErrorLabel(text = errorText.string())
             }
         }
     }
 }
 
-@Preview
-@Composable
-private fun SignInFormPreview() {
-    SignInInputForm(
-        onSignInButtonClick = { },
-        goToSignUp = { }
-    )
+private fun showToast(context: Context, text: String) {
+    Toast.makeText(context, text, Toast.LENGTH_LONG).show()
 }

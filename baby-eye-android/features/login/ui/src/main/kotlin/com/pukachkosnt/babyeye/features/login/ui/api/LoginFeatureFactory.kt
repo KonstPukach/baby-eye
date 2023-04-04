@@ -1,12 +1,13 @@
 package com.pukachkosnt.babyeye.features.login.ui.api
 
 import androidx.compose.runtime.Composable
-import com.pukachkosnt.babyeye.core.di.core.injectViewModel
+import com.pukachkosnt.babyeye.core.di.core.injectSavedStateViewModel
 import com.pukachkosnt.babyeye.core.navigation.ComposableFeature
 import com.pukachkosnt.babyeye.core.navigation.ComposeFeatureFactory
 import com.pukachkosnt.babyeye.features.login.ui.LoginScreen
-import com.pukachkosnt.babyeye.features.login.ui.LoginViewModel
 import com.pukachkosnt.babyeye.features.login.ui.di.DaggerLoginComponent
+import com.pukachkosnt.babyeye.features.login.ui.vm.SignInViewModel
+import com.pukachkosnt.babyeye.features.login.ui.vm.SignUpViewModel
 import javax.inject.Inject
 
 class LoginFeatureFactory @Inject constructor(
@@ -18,11 +19,16 @@ class LoginFeatureFactory @Inject constructor(
         override fun InvokeComposable() {
             val component = DaggerLoginComponent.factory().create(loginDependencies)
 
-            val viewModel: LoginViewModel = injectViewModel {
-                component.createLoginViewModel()
-            }
+            val signInViewModel: SignInViewModel = injectSavedStateViewModel(
+                viewModelFactory = component.createSignInViewModelFactory())
 
-            LoginScreen(loginViewModel = viewModel)
+            val signUpViewModel: SignUpViewModel = injectSavedStateViewModel(
+                viewModelFactory = component.createSignUpViewModelFactory())
+
+            LoginScreen(
+                signInViewModel = signInViewModel,
+                signUpViewModel = signUpViewModel
+            )
         }
     }
 }

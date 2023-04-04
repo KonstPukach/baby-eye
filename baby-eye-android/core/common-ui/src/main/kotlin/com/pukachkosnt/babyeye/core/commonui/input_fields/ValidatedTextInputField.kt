@@ -10,24 +10,22 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import com.pukachkosnt.babyeye.core.commonui.R
-import com.pukachkosnt.babyeye.core.commonui.input_fields.states.IValidatedTextInputFieldState
 import com.pukachkosnt.babyeye.core.commonui.text_fields.ErrorLabel
-import com.pukachkosnt.babyeye.core.commonui.utils.res.getStringOrEmpty
-import com.pukachkosnt.babyeye.core.commonui.validators.model.ValidModel
 
 /**
  * Based on [OutlinedTextField]
  */
 @Composable
-fun <T : Any> ValidatedTextInputField(
+fun ValidatedTextInputField(
     modifier: Modifier = Modifier,
-    textInputFieldState: IValidatedTextInputFieldState<T>,
+    value: String = "",
     onValueChange: (String) -> Unit = { },
+    onFocusChanged: (Boolean) -> Unit = { },
+    errorText: String? = null,
     textStyle: TextStyle = LocalTextStyle.current,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -37,20 +35,11 @@ fun <T : Any> ValidatedTextInputField(
 ) {
     Column(modifier = modifier) {
         OutlinedTextField(
-            value = textInputFieldState.text,
-            onValueChange = { newStringValue ->
-                onValueChange(newStringValue)
-                textInputFieldState.text = newStringValue
-                textInputFieldState.validate()
-            },
+            value = value,
+            onValueChange = onValueChange,
             modifier = Modifier
                 .fillMaxWidth()
-                .onFocusChanged { focusState ->
-                    textInputFieldState.isFocused = focusState.isFocused
-                    if (!focusState.isFocused) {
-                        textInputFieldState.validate()
-                    }
-                },
+                .onFocusChanged { focusState -> onFocusChanged(focusState.isFocused) },
             textStyle = textStyle,
             label = label,
             keyboardOptions = keyboardOptions,
@@ -59,10 +48,9 @@ fun <T : Any> ValidatedTextInputField(
             singleLine = singleLine
         )
 
-        val validModel = textInputFieldState.validModel.value
-        if (validModel is ValidModel.Invalid && validModel.showError) {
+        if (errorText != null) {
             ErrorLabel(
-                text = validModel.errorText.getStringOrEmpty(LocalContext.current),
+                text = errorText,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.input_field_error_padding))
             )
         }

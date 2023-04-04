@@ -18,20 +18,15 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pukachkosnt.babyeye.core.commonui.R
-import com.pukachkosnt.babyeye.core.commonui.input_fields.show_err_strategy.CommonTextInputFieldShowErrorStrategy
-import com.pukachkosnt.babyeye.core.commonui.input_fields.show_err_strategy.ShowErrorStrategy
-import com.pukachkosnt.babyeye.core.commonui.input_fields.states.IValidatedTextInputFieldState
-import com.pukachkosnt.babyeye.core.commonui.input_fields.states.ValidatedTextInputFieldState
 import com.pukachkosnt.babyeye.core.commonui.utils.compose.Password
-import com.pukachkosnt.babyeye.core.commonui.validators.EmptyInputFieldValidator
-import com.pukachkosnt.babyeye.core.commonui.validators.model.ValidationPipeline
-import com.pukachkosnt.babyeye.core.commonui.validators.password.PasswordInputFieldValidator
 
 @Composable
-fun <T : Any> PasswordInputField(
+fun PasswordInputField(
     modifier: Modifier = Modifier,
-    passwordState: IValidatedTextInputFieldState<T>,
+    value: String = "",
+    errorText: String? = null,
     onValueChange: (String) -> Unit = { },
+    onFocusChanged: (Boolean) -> Unit = { },
     label: String = stringResource(id = R.string.password),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     textStyle: TextStyle = MaterialTheme.typography.body2,
@@ -39,8 +34,10 @@ fun <T : Any> PasswordInputField(
 ) {
     ValidatedTextInputField(
         modifier = modifier,
-        textInputFieldState = passwordState,
+        value = value,
+        errorText = errorText,
         onValueChange = onValueChange,
+        onFocusChanged= onFocusChanged,
         textStyle = textStyle,
         keyboardOptions = KeyboardOptions.Password.copy(imeAction = imeAction),
         keyboardActions = keyboardActions,
@@ -57,13 +54,6 @@ fun <T : Any> PasswordInputField(
     )
 }
 
-fun ValidatedTextInputFieldState.Companion.password() = ValidatedTextInputFieldState(
-    ValidationPipeline.from(
-        EmptyInputFieldValidator() to ShowErrorStrategy { it.isFocusedAtLeastOneTime },
-        PasswordInputFieldValidator() to CommonTextInputFieldShowErrorStrategy,
-    )
-)
-
 // ########################   PREVIEW   ########################
 
 @Composable
@@ -71,12 +61,7 @@ fun ValidatedTextInputFieldState.Companion.password() = ValidatedTextInputFieldS
 private fun PasswordPreview() {
     MaterialTheme {
         Column(modifier = Modifier.padding(8.dp)) {
-            PasswordInputField(
-                passwordState = ValidatedTextInputFieldState.password()
-            )
-            PasswordInputField(
-                passwordState = ValidatedTextInputFieldState.password()
-            )
+            PasswordInputField()
         }
     }
 }
