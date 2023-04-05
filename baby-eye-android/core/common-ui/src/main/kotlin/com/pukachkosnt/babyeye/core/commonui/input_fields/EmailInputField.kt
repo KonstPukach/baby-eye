@@ -31,16 +31,16 @@ fun EmailInputField(
     imeAction: ImeAction = ImeAction.Default
 ) {
     ValidatedTextInputField(
-        modifier = modifier,
-        value = value,
-        errorText = errorText,
-        onValueChange = onValueChange,
-        onFocusChanged = onFocusChanged,
-        textStyle = MaterialTheme.typography.body2,
+        modifier        = modifier,
+        value           = value,
+        errorText       = errorText,
+        onValueChange   = onValueChange,
+        onFocusChanged  = onFocusChanged,
+        textStyle       = MaterialTheme.typography.body2,
         keyboardOptions = KeyboardOptions.Email.copy(imeAction = imeAction),
         keyboardActions = keyboardActions,
-        singleLine = true,
-        label = {
+        singleLine      = true,
+        label           = {
             CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                 Text(
                     text  = labelText,

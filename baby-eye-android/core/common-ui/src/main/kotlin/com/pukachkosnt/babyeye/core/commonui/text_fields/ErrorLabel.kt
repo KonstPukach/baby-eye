@@ -10,8 +10,8 @@ fun ErrorLabel(
     text: String,
     modifier: Modifier = Modifier
 ) = Text(
-    text = text,
+    text     = text,
     modifier = modifier,
-    style = MaterialTheme.typography.caption,
-    color = MaterialTheme.colors.error
+    style    = MaterialTheme.typography.caption,
+    color    = MaterialTheme.colors.error
 )

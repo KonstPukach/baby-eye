@@ -8,6 +8,7 @@ plugins {
 val composeCompilerVersion: String by rootProject.extra
 val composeVersion: String by rootProject.extra
 val daggerVersion: String by rootProject.extra
+val lifecycleViewModelVersion: String by rootProject.extra
 
 android {
     compileSdk = 33
@@ -62,11 +63,11 @@ dependencies {
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
 
-    // Android
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleViewModelVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleViewModelVersion")
 
-    // DI - Dagger 2
+    // DI
     implementation("com.google.dagger:dagger:$daggerVersion")
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
 }

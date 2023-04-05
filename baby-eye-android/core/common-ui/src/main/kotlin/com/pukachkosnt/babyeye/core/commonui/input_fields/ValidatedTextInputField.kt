@@ -35,17 +35,17 @@ fun ValidatedTextInputField(
 ) {
     Column(modifier = modifier) {
         OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
             modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged { focusState -> onFocusChanged(focusState.isFocused) },
-            textStyle = textStyle,
-            label = label,
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
+            value                = value,
+            onValueChange        = onValueChange,
+            textStyle            = textStyle,
+            label                = label,
+            keyboardOptions      = keyboardOptions,
+            keyboardActions      = keyboardActions,
             visualTransformation = visualTransformation,
-            singleLine = singleLine
+            singleLine           = singleLine
         )
 
         if (errorText != null) {

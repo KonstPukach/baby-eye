@@ -33,20 +33,20 @@ fun PasswordInputField(
     imeAction: ImeAction = ImeAction.Default
 ) {
     ValidatedTextInputField(
-        modifier = modifier,
-        value = value,
-        errorText = errorText,
-        onValueChange = onValueChange,
-        onFocusChanged= onFocusChanged,
-        textStyle = textStyle,
-        keyboardOptions = KeyboardOptions.Password.copy(imeAction = imeAction),
-        keyboardActions = keyboardActions,
+        modifier             = modifier,
+        value                = value,
+        errorText            = errorText,
+        onValueChange        = onValueChange,
+        onFocusChanged       = onFocusChanged,
+        textStyle            = textStyle,
+        keyboardOptions      = KeyboardOptions.Password.copy(imeAction = imeAction),
+        keyboardActions      = keyboardActions,
         visualTransformation = PasswordVisualTransformation(),
-        singleLine = true,
-        label = {
+        singleLine           = true,
+        label                = {
             CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                 Text(
-                    text = label,
+                    text  = label,
                     style = MaterialTheme.typography.body2
                 )
             }

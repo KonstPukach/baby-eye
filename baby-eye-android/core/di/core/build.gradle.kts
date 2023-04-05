@@ -6,6 +6,7 @@ plugins {
 }
 
 val composeCompilerVersion: String by rootProject.extra
+val lifecycleViewModelVersion: String by rootProject.extra
 
 android {
     compileSdk = 33
@@ -46,6 +47,6 @@ android {
 
 dependencies {
     // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleViewModelVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleViewModelVersion")
 }

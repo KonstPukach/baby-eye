@@ -22,28 +22,28 @@ internal fun LoginNavHost(
     showLoadingScreen: (Boolean) -> Unit
 ) {
     AnimatedNavHost(
-        modifier = modifier,
-        navController = loginNavController,
+        modifier         = modifier,
+        navController    = loginNavController,
         startDestination = SingInDestination
     ) {
         animatedComposable(SingInDestination) {
             AdjustedLoginLayout(
-                modifier = Modifier.fillMaxSize(),
-                logo = { Logo() },
+                modifier  = Modifier.fillMaxSize(),
+                logo      = { Logo() },
                 inputForm = {
                     SignInInputForm(
                         goToSignUp = {
                             loginNavController.navigateWithAnim(
                                 route = SingUpDestination,
                                 composeAnimOptions = ComposeNavAnimOptions(
-                                    enterAnim = { c, o -> SlideFromRight(c, o) },
-                                    exitAnim = { c, o -> SlideToLeft(c, o) },
+                                    enterAnim    = { c, o -> SlideFromRight(c, o) },
+                                    exitAnim     = { c, o -> SlideToLeft(c, o) },
                                     popEnterAnim = { c, o -> SlideFromLeft(c, o) },
-                                    popExitAnim = { c, o -> SlideToRight(c, o) }
+                                    popExitAnim  = { c, o -> SlideToRight(c, o) }
                                 )
                             )
                          },
-                        signInViewModel = signInViewModel,
+                        signInViewModel   = signInViewModel,
                         showLoadingScreen = showLoadingScreen
                     )
                 }
@@ -51,12 +51,12 @@ internal fun LoginNavHost(
         }
         animatedComposable(SingUpDestination) {
             AdjustedLoginLayout(
-                modifier = Modifier.fillMaxSize(),
-                logo = { Logo() },
+                modifier  = Modifier.fillMaxSize(),
+                logo      = { Logo() },
                 inputForm = {
                     SignUpInputForm(
-                        goToSignIn = { loginNavController.navigateUp() },
-                        signUpViewModel = signUpViewModel,
+                        goToSignIn        = { loginNavController.navigateUp() },
+                        signUpViewModel   = signUpViewModel,
                         showLoadingScreen = showLoadingScreen
                     )
                 }

@@ -70,6 +70,7 @@ android {
 }
 
 dependencies {
+    // Project modules dependencies
     implementation(project(":remote:networking"))
 
     // Networking
@@ -77,7 +78,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
 
-    // DI - Dagger 2
+    // DI
     implementation("com.google.dagger:dagger:$daggerVersion")
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
 }

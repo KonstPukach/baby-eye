@@ -22,16 +22,16 @@ internal fun LoginScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         LoginNavHost(
-            signInViewModel = signInViewModel,
-            signUpViewModel = signUpViewModel,
+            signInViewModel    = signInViewModel,
+            signUpViewModel    = signUpViewModel,
             loginNavController = loginNavController,
-            modifier = Modifier
+            modifier           = Modifier
                 .fillMaxSize()
                 .padding(
-                    vertical = dimensionResource(id = CR.dimen.padding_medium),
+                    vertical   = dimensionResource(id = CR.dimen.padding_medium),
                     horizontal = dimensionResource(id = CR.dimen.padding_small)
                 ),
-            showLoadingScreen = { show -> showLoadingPage = show }
+            showLoadingScreen  = { show -> showLoadingPage = show }
         )
 
         if (showLoadingPage) {
